@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X9 Thor Gaming Mouse</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="diaz.css">
+</head>
+<body>
+    <header>
+        <h1>X9 Thor Gaming Mouse</h1>
+    </header>
+    
+    <main>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="thor.jpg" class="img-fluid" alt="X9 Thor Gaming Mouse">
+                </div>
+                <div class="col-md-6">
+                    <h2>Product Details</h2>
+                    <p>This is the X9 Thor Gaming Mouse, perfect for gaming enthusiasts.
+                         It offers high precision and customizable features.</p>
+                    <p>Price: ₱436.00</p>
+                    <button class="btn btn-primary" onclick="confirmAddToCart()">Add to Cart</button>
+                    <button class="btn btn-secondary" onclick="scrollToReview()">Rate & Review</button>
+                    <button class="btn btn-secondary" onclick="goBack()">Back to Products</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="confirmation" class="notification warning" style="display: none;">
+        <p>Are you sure you want to add this product to your cart?</p>
+        <button class="btn btn-warning" onclick="addToCart()">Yes</button>
+        <button class="btn btn-secondary" onclick="cancelAddToCart()">No</button>
+    </div>
+
+    <div id="addCartNotification" class="notification" style="display: none;">
+        Product added to cart successfully!
+    </div>
+
+    <div id="ratingForm" style="display: none;">
+        <h4>Rate & Review</h4>
+        <div class="form-group">
+            <label for="rating">Rating:</label>
+            <div class="rating-stars">
+                <i class="far fa-star" onclick="setRating(1)"></i>
+                <i class="far fa-star" onclick="setRating(2)"></i>
+                <i class="far fa-star" onclick="setRating(3)"></i>
+                <i class="far fa-star" onclick="setRating(4)"></i>
+                <i class="far fa-star" onclick="setRating(5)"></i>
+            </div>
+            <input type="hidden" id="rating" value="0">
+        </div>
+        <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea class="form-control" id="comment" rows="3"></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="submitRating()">Submit</button>
+        <button class="btn btn-secondary" onclick="cancelRating()">Cancel</button>
+    </div>
+
+    <div id="successNotification" class="notification">
+        Thank you for rating our product!
+    </div>
+
+    <script>
+        function confirmAddToCart() {
+            var confirmation = document.getElementById('confirmation');
+            confirmation.style.display = 'block';
+        }
+
+        function addToCart() {
+            var confirmation = document.getElementById('confirmation');
+            confirmation.style.display = 'none';
+            var addCartNotification = document.getElementById('addCartNotification');
+            addCartNotification.style.display = 'block';
+            setTimeout(function() {
+                addCartNotification.style.display = 'none';
+            }, 2000);
+        }
+
+        function cancelAddToCart() {
+            var confirmation = document.getElementById('confirmation');
+            confirmation.style.display = 'none';
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        function scrollToReview() {
+            var ratingForm = document.getElementById('ratingForm');
+            ratingForm.style.display = 'block';
+            ratingForm.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function setRating(value) {
+            var stars = document.querySelectorAll('.rating-stars i');
+            for (var i = 0; i < stars.length; i++) {
+                if (i < value) {
+                    stars[i].classList.remove('far');
+                    stars[i].classList.add('fas');
+                } else {
+                    stars[i].classList.remove('fas');
+                    stars[i].classList.add('far');
+                }
+            }
+            document.getElementById('rating').value = value;
+        }
+
+        function submitRating() {
+            var rating = document.getElementById('rating').value;
+            var comment = document.getElementById('comment').value;
+
+
+            document.getElementById('ratingForm').style.display = 'none';
+            document.getElementById('successNotification').style.display = 'block';
+
+            setTimeout(function() {
+                document.getElementById('successNotification').style.display = 'none';
+            }, 3000);
+        }
+
+        function cancelRating() {
+            document.getElementById('ratingForm').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
